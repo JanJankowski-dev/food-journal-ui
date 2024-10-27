@@ -1,0 +1,11 @@
+.navbar {
+  box-shadow: 0 4px 2px -2px rgb(128, 128, 128);
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.nav-link {
+  font-size: 1.1rem;
+}
