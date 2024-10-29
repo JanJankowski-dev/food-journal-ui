@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import Keycloak from "keycloak-js";
+import {UserProfile} from "./user-profile";
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import Keycloak from "keycloak-js";
 export class KeycloakService {
 
   private _keycloak: Keycloak | undefined;
+  private _userProfile: UserProfile | undefined;
 
   get keycloak() {
 
@@ -20,17 +22,32 @@ export class KeycloakService {
     return this._keycloak;
   }
 
+  get profile(): UserProfile | undefined {
+    return this._userProfile;
+  }
+
   constructor() {
   }
 
   async init() {
-    console.log("Authentication the user...")
-
     const authenticated = await this.keycloak.init({
-      onLoad: 'login-required'
-    })
+      onLoad: 'login-required',
+    });
+
     if (authenticated) {
-      console.log("Authentication the user...")
+      this._userProfile = (await this._keycloak?.loadUserProfile()) as UserProfile
+      this._userProfile.token = this._keycloak?.token
+    } {
+
     }
   }
+
+  login() {
+    return this.keycloak?.login()
+  }
+
+  logout(){
+    return this.keycloak.logout()
+  }
+
 }
