@@ -1,4 +1,16 @@
 <div>
   <h2>HELLO FROM HOME</h2>
+  <button type="button" class="btn btn-primary" (click)="getFood()">Food</button>
+</div>
+<div>
+  {{dailyPlans?.date}}
+
+  <div *ngFor="let meal of dailyPlans?.meals">
+    <div>{{meal.name}}</div>
+    <div>{{meal.description}}</div>
+    <div *ngFor="let ingredient of meal.ingredients">
+      <div>{{ingredient.name}} {{ingredient.quantity}} {{ingredient.unit}}</div>
+    </div>
+  </div>
 </div>
 

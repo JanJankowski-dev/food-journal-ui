@@ -20,6 +20,6 @@ export class HeaderComponent {
   }
 
   getFood() {
-    this.foodService.getFood().pipe().forEach(it => console.log(it)).then(r => console.log('then '+ r))
+    this.foodService.getDailyPlan()
   }
 }
