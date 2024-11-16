@@ -1,0 +1,17 @@
+<div>
+  <button type="button" class="btn btn-primary" (click)="getFood()">fetch Daily Plan</button>
+</div>
+<app-meal-create> COOOOOSTAM</app-meal-create>
+<div>
+  {{dailyPlans?.date}}
+
+  <div *ngFor="let meal of dailyPlans?.meals">
+    <div>{{meal.name}}</div>
+    <div>{{meal.description}}</div>
+    <div *ngFor="let ingredient of meal.ingredients">
+      <div>{{ingredient.name}} {{ingredient.quantity}} {{ingredient.unit}}</div>
+    </div>
+  </div>
+
+</div>
+

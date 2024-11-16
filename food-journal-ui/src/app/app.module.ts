@@ -8,22 +8,28 @@ import {HomeComponent} from "./home/home.component";
 import {KeycloakService} from "./services/keycloak/keycloak.service";
 import {RouterOutlet} from "@angular/router";
 import {HttpHandlerFn, HttpHeaders, HttpRequest, provideHttpClient, withInterceptors} from "@angular/common/http";
+import {DailyPlanComponent} from "./daily-plan/daily-plan.component";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MealCreateComponent} from "./daily-plan/meal/meal-create.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 export function kcFactory(kcService: KeycloakService) {
   return () => kcService.init();
 }
 
-
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    DailyPlanComponent,
+    MealCreateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterOutlet
+    RouterOutlet,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),
@@ -33,7 +39,8 @@ export function kcFactory(kcService: KeycloakService) {
       deps: [KeycloakService],
       useFactory: kcFactory,
       multi: true
-    }
+    },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 export enum Unit {
-  GR= " GR",
+  GR = " GR",
   KG = "KR",
   L = "L",
   ML = "ML",

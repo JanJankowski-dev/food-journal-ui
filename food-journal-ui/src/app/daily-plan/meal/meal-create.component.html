@@ -1,0 +1,62 @@
+<form [formGroup]="mealForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Nazwa posiłku:</label>
+    <input id="name" formControlName="name" required />
+    <div *ngIf="mealForm.get('name')?.invalid && mealForm.get('name')?.touched">
+      Nazwa jest wymagana.
+    </div>
+  </div>
+
+  <div>
+    <label for="description">Opis:</label>
+    <textarea id="description" formControlName="description"></textarea>
+  </div>
+
+  <div>
+    <label for="time">Godzina:</label>
+    <input id="time" type="time" formControlName="time" required />
+    <div *ngIf="mealForm.get('time')?.invalid && mealForm.get('time')?.touched">
+      Godzina jest wymagana.
+    </div>
+  </div>
+
+  <div formArrayName="ingredients">
+    <h3>Składniki</h3>
+    <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i">
+      <div>
+        <label for="ingredient-name-{{ i }}">Nazwa składnika:</label>
+        <input id="ingredient-name-{{ i }}" formControlName="name" required />
+        <div *ngIf="ingredient.get('name')?.invalid && ingredient.get('name')?.touched">
+          Nazwa składnika jest wymagana.
+        </div>
+      </div>
+
+      <div>
+        <label for="ingredient-quantity-{{ i }}">Ilość:</label>
+        <input id="ingredient-quantity-{{ i }}" type="number" formControlName="quantity" required />
+        <div *ngIf="ingredient.get('quantity')?.invalid && ingredient.get('quantity')?.touched">
+          Ilość jest wymagana i musi być większa niż 0.
+        </div>
+      </div>
+
+      <div>
+        <label for="ingredient-unit-{{ i }}">Jednostka:</label>
+        <select id="ingredient-unit-{{ i }}" formControlName="unit" required>
+          <option value="">-- Wybierz jednostkę --</option>
+          <option *ngFor="let unit of units" [value]="unit">{{ unit }}</option>
+        </select>
+        <div *ngIf="ingredient.get('unit')?.invalid && ingredient.get('unit')?.touched">
+          Jednostka jest wymagana.
+        </div>
+      </div>
+
+      <button type="button" (click)="removeIngredient(i)">Usuń składnik</button>
+    </div>
+
+    <button type="button" (click)="addIngredient()">Dodaj składnik</button>
+  </div>
+
+  <button type="submit">Utwórz posiłek</button>
+</form>
+
+
