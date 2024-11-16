@@ -1,3 +1,9 @@
 div{
   margin-top: 15px;
 }
+
+.daily-plan-table {
+  display: grid;
+  place-content: center;
+
+}

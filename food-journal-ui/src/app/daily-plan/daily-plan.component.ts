@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {FoodService} from "../services/food/food-service";
-import {DailyPlanDto} from "./meal/meal.model";
+import {DailyPlanDto, MealDto} from "./meal/meal.model";
 
 @Component({
   selector: 'app-daily-plan',
@@ -10,6 +10,7 @@ import {DailyPlanDto} from "./meal/meal.model";
 export class DailyPlanComponent {
 
   dailyPlans: DailyPlanDto | undefined
+
   constructor(private foodService: FoodService) {}
 
   getFood() {
@@ -22,4 +23,5 @@ export class DailyPlanComponent {
       }
     });
   }
+
 }
