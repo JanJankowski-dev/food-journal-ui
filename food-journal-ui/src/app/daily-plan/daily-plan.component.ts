@@ -1,6 +1,8 @@
 import {Component} from "@angular/core";
 import {FoodService} from "../services/food/food-service";
-import {DailyPlanDto, MealDto} from "./meal/meal.model";
+import {DailyPlanDto} from "./meal/meal.model";
+import {MatDialog} from "@angular/material/dialog";
+import {MealCreateComponent} from "./meal/meal-create.component";
 
 @Component({
   selector: 'app-daily-plan',
@@ -11,7 +13,7 @@ export class DailyPlanComponent {
 
   dailyPlans: DailyPlanDto | undefined
 
-  constructor(private foodService: FoodService) {}
+  constructor(private foodService: FoodService, public dialog: MatDialog) {}
 
   getFood() {
     this.foodService.getDailyPlan().subscribe({
@@ -21,6 +23,17 @@ export class DailyPlanComponent {
       error: (error) => {
         console.error('Error during data fetching', error);
       }
+    });
+  }
+  openModal(): void {
+    const dialogRef = this.dialog.open(MealCreateComponent, {
+      width: '400px',
+      data: { /* pass data if needed */ }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // Handle the result if necessary
     });
   }
 

@@ -12,6 +12,8 @@ import {DailyPlanComponent} from "./daily-plan/daily-plan.component";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MealCreateComponent} from "./daily-plan/meal/meal-create.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButton} from "@angular/material/button";
 
 export function kcFactory(kcService: KeycloakService) {
   return () => kcService.init();
@@ -29,7 +31,9 @@ export function kcFactory(kcService: KeycloakService) {
     BrowserModule,
     AppRoutingModule,
     RouterOutlet,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatButton
   ],
   providers: [
     provideClientHydration(),

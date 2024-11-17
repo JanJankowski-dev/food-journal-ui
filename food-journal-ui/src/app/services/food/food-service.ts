@@ -9,12 +9,10 @@ import {DailyPlanDto} from "../../daily-plan/meal/meal.model";
 })
 export class FoodService {
 
-  private apiUrl = `${environment.apiUrl}/daily-plan/daily-plan`;
-
   constructor(private http: HttpClient) { }
 
   getDailyPlan(): Observable<DailyPlanDto> {
-    return this.http.get<DailyPlanDto>(this.apiUrl);
+    return this.http.get<DailyPlanDto>(`${environment.apiUrl}/daily-plan/${new Date().toJSON().slice(0, 10)}`);
   }
 
 }
