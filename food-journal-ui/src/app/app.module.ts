@@ -54,7 +54,6 @@ export class AppModule {
 
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
   const authToken = inject(KeycloakService).keycloak.token;
-  console.log('authInterceptor Call')
   if (authToken) {
     const authReq = req.clone({
       headers: new HttpHeaders({
