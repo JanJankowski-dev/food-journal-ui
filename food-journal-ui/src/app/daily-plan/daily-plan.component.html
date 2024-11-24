@@ -1,34 +1,32 @@
 <div>
-  <button type="button" class="btn btn-primary" (click)="getFood()">fetch Daily Plan</button>
-  <button mat-button (click)="openModal()">Open Modal</button>
+  <button (click)="getFood()" class="btn btn-primary" type="button">Fetch Daily Plan</button>
+  <button (click)="openModal()" mat-button>Add Meal</button>
 </div>
 <div class="daily-plan-table">
 
   <div><h2>Plan dnia na {{ dailyPlans?.date | date: 'dd.MM.yyyy' }}</h2></div>
   <div>
     <table class="table table-light">
-    <thead>
-    <tr>
-      <th  scope="col">Godzina</th>
-      <th scope="col">Nazwa Posiłku</th>
-      <th scope="col">Składniki</th>
-    </tr>
-    </thead>
-    <tbody>
+      <thead>
+      <tr>
+        <th scope="col">Godzina</th>
+        <th scope="col">Nazwa Posiłku</th>
+        <th scope="col">Składniki</th>
+      </tr>
+      </thead>
+      <tbody>
 
-    <tr *ngFor="let meal of dailyPlans?.meals" style="cursor: pointer;">
-      <td>{{ meal.time }}</td>
-      <td>{{ meal.name }}</td>
-      <td>
+      <tr *ngFor="let meal of dailyPlans?.meals" style="cursor: pointer;">
+        <td>{{ meal.time }}</td>
+        <td>{{ meal.name }}</td>
+        <td>
        <span *ngFor="let ingredient of meal.ingredients">
           <span>{{ ingredient.name }}, {{ ingredient.quantity }}, {{ ingredient.unit }}</span>
         </span>
-      </td>
-
-    </tr>
-
-    </tbody>
-  </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 

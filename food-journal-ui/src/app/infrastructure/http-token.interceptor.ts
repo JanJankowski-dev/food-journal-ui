@@ -6,7 +6,8 @@ import {KeycloakService} from "../services/keycloak/keycloak.service";
 @Injectable()
 export class HttpTokenInterceptor implements HttpInterceptor {
 
-  constructor(private keycloakService: KeycloakService) {}
+  constructor(private keycloakService: KeycloakService) {
+  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this.keycloakService.keycloak.token;

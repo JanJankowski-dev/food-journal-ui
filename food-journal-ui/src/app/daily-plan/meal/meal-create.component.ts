@@ -17,7 +17,7 @@ export class MealCreateComponent {
     private fb: FormBuilder,
     private mealService: MealService,
     public dialogRef: MatDialogRef<MealCreateComponent>,
-    ) {
+  ) {
     this.mealForm = this.fb.group({
       id: [null],
       name: ['', Validators.required],
@@ -45,6 +45,10 @@ export class MealCreateComponent {
     this.ingredients.removeAt(index);
   }
 
+  closeModal(): void {
+    this.dialogRef.close()
+  }
+
   onSubmit(): void {
     if (this.mealForm.valid) {
       const meal = this.prepareMealDto();
@@ -57,7 +61,6 @@ export class MealCreateComponent {
         }
       });
     } else {
-      console.log('Form is invalid');
     }
   }
 

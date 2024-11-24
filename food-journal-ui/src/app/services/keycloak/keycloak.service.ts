@@ -7,8 +7,12 @@ import {UserProfile} from "./user-profile";
 })
 export class KeycloakService {
 
-  private _keycloak: Keycloak | undefined;
   private _userProfile: UserProfile | undefined;
+
+  constructor() {
+  }
+
+  private _keycloak: Keycloak | undefined;
 
   get keycloak() {
 
@@ -26,9 +30,6 @@ export class KeycloakService {
     return this._userProfile;
   }
 
-  constructor() {
-  }
-
   async init() {
     const authenticated = await this.keycloak.init({
       onLoad: 'login-required',
@@ -37,7 +38,8 @@ export class KeycloakService {
     if (authenticated) {
       this._userProfile = (await this._keycloak?.loadUserProfile()) as UserProfile
       this._userProfile.token = this._keycloak?.token
-    } {
+    }
+    {
 
     }
   }
@@ -46,7 +48,7 @@ export class KeycloakService {
     return this.keycloak?.login()
   }
 
-  logout(){
+  logout() {
     return this.keycloak.logout()
   }
 

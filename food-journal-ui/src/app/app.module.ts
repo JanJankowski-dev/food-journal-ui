@@ -9,7 +9,7 @@ import {KeycloakService} from "./services/keycloak/keycloak.service";
 import {RouterOutlet} from "@angular/router";
 import {HttpHandlerFn, HttpHeaders, HttpRequest, provideHttpClient, withInterceptors} from "@angular/common/http";
 import {DailyPlanComponent} from "./daily-plan/daily-plan.component";
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {MealCreateComponent} from "./daily-plan/meal/meal-create.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";

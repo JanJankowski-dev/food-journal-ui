@@ -1,0 +1,22 @@
+form {
+  margin: 15px;
+}
+
+.modal-header {
+  margin: 15px;
+}
+
+.modal-body {
+  padding-bottom: 20px;
+
+  .error {
+    color: darkred;
+  }
+}
+
+.modal-footer {
+  .btn {
+    margin: 5px;
+
+  }
+}

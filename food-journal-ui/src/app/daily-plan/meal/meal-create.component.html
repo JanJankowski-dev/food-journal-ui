@@ -1,62 +1,68 @@
-<form [formGroup]="mealForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="name">Nazwa posiłku:</label>
-    <input id="name" formControlName="name" required />
-    <div *ngIf="mealForm.get('name')?.invalid && mealForm.get('name')?.touched">
-      Nazwa jest wymagana.
-    </div>
+<div class="modal-content">
+  <div class="modal-header">
   </div>
+  <div class="modal-body">
 
-  <div>
-    <label for="description">Opis:</label>
-    <textarea id="description" formControlName="description"></textarea>
-  </div>
-
-  <div>
-    <label for="time">Godzina:</label>
-    <input id="time" type="time" formControlName="time" required />
-    <div *ngIf="mealForm.get('time')?.invalid && mealForm.get('time')?.touched">
-      Godzina jest wymagana.
-    </div>
-  </div>
-
-  <div formArrayName="ingredients">
-    <h3>Składniki</h3>
-    <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i">
-      <div>
-        <label for="ingredient-name-{{ i }}">Nazwa składnika:</label>
-        <input id="ingredient-name-{{ i }}" formControlName="name" required />
-        <div *ngIf="ingredient.get('name')?.invalid && ingredient.get('name')?.touched">
-          Nazwa składnika jest wymagana.
+    <form (ngSubmit)="onSubmit()" [formGroup]="mealForm">
+      <div class="col-sm-12">
+        <label class="col-sm-4" for="name">Nazwa posiłku:</label>
+        <input class="col-sm-8" formControlName="name" id="name" required/>
+        <div *ngIf="mealForm.get('name')?.invalid && mealForm.get('name')?.touched" class="error">
+          Nazwa jest wymagana.
         </div>
       </div>
 
-      <div>
-        <label for="ingredient-quantity-{{ i }}">Ilość:</label>
-        <input id="ingredient-quantity-{{ i }}" type="number" formControlName="quantity" required />
-        <div *ngIf="ingredient.get('quantity')?.invalid && ingredient.get('quantity')?.touched">
-          Ilość jest wymagana i musi być większa niż 0.
+      <div class="col-sm-12">
+        <label class="col-sm-4" for="description">Opis:</label>
+        <textarea class="col-sm-8" formControlName="description" id="description"></textarea>
+      </div>
+
+      <div class="col-sm-12">
+        <label class="col-sm-4" for="time">Godzina:</label>
+        <input class="col-sm-4" formControlName="time" id="time" required type="time"/>
+        <div *ngIf="mealForm.get('time')?.invalid && mealForm.get('time')?.touched" class="error">
+          Godzina jest wymagana.
         </div>
       </div>
 
-      <div>
-        <label for="ingredient-unit-{{ i }}">Jednostka:</label>
-        <select id="ingredient-unit-{{ i }}" formControlName="unit" required>
-          <option value="">-- Wybierz jednostkę --</option>
-          <option *ngFor="let unit of units" [value]="unit">{{ unit }}</option>
-        </select>
-        <div *ngIf="ingredient.get('unit')?.invalid && ingredient.get('unit')?.touched">
-          Jednostka jest wymagana.
+      <div class="col-sm-12" formArrayName="ingredients">
+        <h5>Składniki</h5>
+        <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i">
+          <div class="col-sm-12">
+            <label class="col-sm-4" for="ingredient-name-{{ i }}">Nazwa składnika:</label>
+            <input class="col-sm-8" formControlName="name" id="ingredient-name-{{ i }}" required/>
+            <div *ngIf="ingredient.get('name')?.invalid && ingredient.get('name')?.touched" class="error">
+              Nazwa składnika jest wymagana.
+            </div>
+          </div>
+
+          <div>
+            <label class="col-sm-4" for="ingredient-quantity-{{ i }}">Ilość:</label>
+            <input class="col-sm-8" formControlName="quantity" id="ingredient-quantity-{{ i }}" required type="number"/>
+            <div *ngIf="ingredient.get('quantity')?.invalid && ingredient.get('quantity')?.touched" class="error">
+              Ilość jest wymagana i musi być większa niż 0.
+            </div>
+          </div>
+
+          <div>
+            <label class="col-sm-4" for="ingredient-unit-{{ i }}">Jednostka:</label>
+            <select class="col-sm-8" formControlName="unit" id="ingredient-unit-{{ i }}" required>
+              <option value="">-- Wybierz jednostkę --</option>
+              <option *ngFor="let unit of units" [value]="unit">{{ unit }}</option>
+            </select>
+            <div *ngIf="ingredient.get('unit')?.invalid && ingredient.get('unit')?.touched" class="error">
+              Jednostka jest wymagana.
+            </div>
+          </div>
+
+          <button (click)="removeIngredient(i)" type="button">Usuń składnik</button>
         </div>
+        <button (click)="addIngredient()" type="button">Dodaj składnik</button>
       </div>
-
-      <button type="button" (click)="removeIngredient(i)">Usuń składnik</button>
-    </div>
-
-    <button type="button" (click)="addIngredient()">Dodaj składnik</button>
+      <div class="modal-footer">
+        <button (click)="closeModal()" class="btn btn-secondary" type="button">Close</button>
+        <button class="btn btn-primary" type="submit">Utwórz posiłek</button>
+      </div>
+    </form>
   </div>
-
-  <button type="submit">Utwórz posiłek</button>
-</form>
-
-
+</div>

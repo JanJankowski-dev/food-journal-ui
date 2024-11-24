@@ -13,7 +13,8 @@ export class DailyPlanComponent {
 
   dailyPlans: DailyPlanDto | undefined
 
-  constructor(private foodService: FoodService, public dialog: MatDialog) {}
+  constructor(private foodService: FoodService, public dialog: MatDialog) {
+  }
 
   getFood() {
     this.foodService.getDailyPlan().subscribe({
@@ -25,15 +26,14 @@ export class DailyPlanComponent {
       }
     });
   }
+
   openModal(): void {
     const dialogRef = this.dialog.open(MealCreateComponent, {
-      width: '400px',
-      data: { /* pass data if needed */ }
+      width: '60%',
+      data: { /* pass data if needed */}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // Handle the result if necessary
     });
   }
 
