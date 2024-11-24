@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MealService} from './meal.service';
 import {Unit} from './meal.model';
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-meal-create',
@@ -12,12 +12,13 @@ import {MatDialogRef} from "@angular/material/dialog";
 export class MealCreateComponent {
   mealForm: FormGroup;
   units = Object.values(Unit);
-
+  dailyPlanId: string = ""
   constructor(
     private fb: FormBuilder,
     private mealService: MealService,
     public dialogRef: MatDialogRef<MealCreateComponent>,
-  ) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.dailyPlanId = data.dailyPlanId
     this.mealForm = this.fb.group({
       id: [null],
       name: ['', Validators.required],
@@ -52,7 +53,7 @@ export class MealCreateComponent {
   onSubmit(): void {
     if (this.mealForm.valid) {
       const meal = this.prepareMealDto();
-      this.mealService.createMeal(meal, "1").subscribe({
+      this.mealService.createMeal(meal, this.dailyPlanId).subscribe({
         next: (response) => {
           this.dialogRef.close();
         },

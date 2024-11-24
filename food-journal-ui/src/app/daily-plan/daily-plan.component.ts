@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {FoodService} from "../services/food/food-service";
 import {DailyPlanDto} from "./meal/meal.model";
 import {MatDialog} from "@angular/material/dialog";
@@ -9,11 +9,15 @@ import {MealCreateComponent} from "./meal/meal-create.component";
   templateUrl: './daily-plan.component.html',
   styleUrl: './daily-plan.component.css'
 })
-export class DailyPlanComponent {
+export class DailyPlanComponent implements OnInit {
 
   dailyPlans: DailyPlanDto | undefined
 
   constructor(private foodService: FoodService, public dialog: MatDialog) {
+  }
+
+  ngOnInit(): void {
+    this.getFood();
   }
 
   getFood() {
@@ -30,10 +34,11 @@ export class DailyPlanComponent {
   openModal(): void {
     const dialogRef = this.dialog.open(MealCreateComponent, {
       width: '60%',
-      data: { /* pass data if needed */}
+      data: {dailyPlanId: this.dailyPlans != undefined ? this.dailyPlans.id: ""}
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getFood();
     });
   }
 
